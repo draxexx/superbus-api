@@ -1,5 +1,40 @@
 {
+  "name": "superbus-api",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "reset": "npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate",
+    "migrate": "npx sequelize-cli db:migrate",
+    "un-migrate-all": "npx sequelize-cli db:migrate:undo:all",
+    "un-migrate-back": "npx sequelize-cli db:migrate:undo",
+    "seed-all": "npx sequelize-cli db:seed:all",
+    "seed-undo-all": "npx sequelize-cli db:seed:undo:all",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/draxexx/superbus-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/draxexx/superbus-api/issues"
+  },
+  "homepage": "https://github.com/draxexx/superbus-api#readme",
+  "description": "",
   "dependencies": {
-    "babel-register": "^6.26.0"
+    "babel-register": "^6.26.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-validator": "^6.14.2",
+    "helmet": "^5.1.0",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.19",
+    "sequelize": "^6.21.3"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.4.1"
   }
 }
