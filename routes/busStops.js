@@ -48,4 +48,29 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+// update the busStop
+router.post("/:id", async (req, res, next) => {
+  try {
+    await BusStop.update(
+      {
+        name: req.body.name,
+        updatedAt: new Date(),
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+    const busStop = await BusStop.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+    return res.status(200).json(busStop);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
