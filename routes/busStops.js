@@ -14,6 +14,21 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// gets single busStop
+router.get("/:id", async (req, res, next) => {
+  try {
+    const busStops = await BusStop.findOne({
+      where: {
+        id: req.params.id,
+      },
+      attributes: ["id", "name"],
+    });
+    return res.json(busStops);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // create new busStop
 router.post("/", async (req, res, next) => {
   const id = generateId(4);

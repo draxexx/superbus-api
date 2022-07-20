@@ -33,6 +33,36 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// gets single tour
+router.get("/:id", async (req, res, next) => {
+  try {
+    const tours = await Tour.findOne({
+      where: { id: req.params.id },
+      attributes: { exclude: ["routineId", "createdAt", "updatedAt"] },
+      include: [
+        {
+          model: Routine,
+          as: "routine",
+          attributes: ["id", "name"],
+          include: [
+            {
+              model: Route,
+              as: "routes",
+              attributes: {
+                exclude: ["createdAt", "updatedAt"],
+              },
+            },
+          ],
+        },
+      ],
+      order: [["date", "ASC"]],
+    });
+    return res.json(tours);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // create new tour
 router.post("/", async (req, res, next) => {
   const id = generateId(6);
